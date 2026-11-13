@@ -1,6 +1,6 @@
 ---
 plan: morning-digest
-status: ready
+status: done
 owner: rook
 opened: 2026-10-29
 ---
@@ -77,3 +77,19 @@ page again with `LANE_MARKER` unset (the banner reads "no marker set") and uploa
 link. Move this plan to `docs/plans/done/` with its issue list.
 
 Done when: the preview link no longer shows the lane marker.
+
+## Delivery
+
+Issues:
+
+- https://github.com/piotter121/mega-challange-s01e04/issues/1
+- https://github.com/piotter121/mega-challange-s01e04/issues/2
+- https://github.com/piotter121/mega-challange-s01e04/issues/3
+- https://github.com/piotter121/mega-challange-s01e04/issues/4
+- https://github.com/piotter121/mega-challange-s01e04/issues/5
+- https://github.com/piotter121/mega-challange-s01e04/issues/6
+- https://github.com/piotter121/mega-challange-s01e04/issues/7
+
+Preview: https://piotter121.github.io/mega-challange-s01e04/
+
+Reviewed, then the lane marker was removed from the preview.
