@@ -38,19 +38,21 @@ server_pid=
 
 cleanup() {
   if [ -n "$server_pid" ]; then
-    kill "$server_pid" 2>/dev/null || true
-    wait "$server_pid" 2>/dev/null || true
+    local process_group=$server_pid
+    server_pid=
+    kill -- -"$process_group" 2>/dev/null || true
+    wait "$process_group" 2>/dev/null || true
   fi
   rm -f "$server_log"
 }
 trap cleanup EXIT INT TERM
 
-pnpm start >"$server_log" 2>&1 &
+setsid pnpm start >"$server_log" 2>&1 &
 server_pid=$!
 
 ready=false
 for _ in $(seq 1 60); do
-  if curl --silent --show-error --fail --output /dev/null "$base_url/"; then
+  if curl --silent --fail --output /dev/null "$base_url/"; then
     ready=true
     break
   fi

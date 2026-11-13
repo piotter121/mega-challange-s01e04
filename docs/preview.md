@@ -6,16 +6,17 @@ branch.
 
 ## Local capture
 
-Use an absolute directory outside this repository. Set the marker only in your
-shell or environment; do not put it in a command history, file, or commit.
+Use an absolute directory outside this repository. A local `.env` is untracked
+and allowed, but it must never be committed. Set the marker only in your shell
+or environment; do not put it in a command history or commit.
 
 ```sh
-mkdir -p /tmp/rig-preview
-LANE_ID=lane-07 LANE_MARKER="$LANE_MARKER" scripts/export-preview.sh /tmp/rig-preview
+mkdir -p /tmp/opencode/rig-preview
+LANE_ID=lane-07 LANE_MARKER="$LANE_MARKER" scripts/export-preview.sh /tmp/opencode/rig-preview
 ```
 
-The command writes `/tmp/rig-preview/index.html` and prints that location. It
-does not publish anything.
+The command writes `/tmp/opencode/rig-preview/index.html` and prints that
+location. It does not publish anything.
 
 ## Review deployment
 
@@ -31,9 +32,11 @@ gh workflow run preview.yml --ref main -f include_marker=true
 ```
 
 After the reviewer has responded, obtain a new approval before replacing the
-same URL with a marker-free preview:
+same URL with a marker-free preview. This explicitly empties `LANE_MARKER`, so
+it overrides any value in the local `.env`:
 
 ```sh
+LANE_MARKER= scripts/export-preview.sh /tmp/opencode/rig-preview
 gh workflow run preview.yml --ref main -f include_marker=false
 ```
 

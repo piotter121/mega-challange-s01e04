@@ -24,9 +24,6 @@ jobs:
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
-    env:
-      LANE_ID: lane-07
-      LANE_MARKER: ${{ inputs.include_marker && secrets.LANE_MARKER || '' }}
     steps:
       - uses: actions/checkout@v4
 
@@ -49,6 +46,9 @@ jobs:
         run: pnpm test
 
       - name: Export digest
+        env:
+          LANE_ID: lane-07
+          LANE_MARKER: ${{ inputs.include_marker && secrets.LANE_MARKER || '' }}
         run: scripts/export-preview.sh "$RUNNER_TEMP/rig-preview"
 
       - uses: actions/configure-pages@v5
